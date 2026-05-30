@@ -1,12 +1,35 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-multi-container
+  name: web-and-sidecar
+  labels:
+    app: multi-container-demo
 spec:
+  # 1. Define a shared volume that both containers can access
+  volumes:
+  - name: shared-html
+    emptyDir: {}
+
   containers:
-  - name: nginx
-    image: nginx:1.14.2
+  # 2. Main Container: Nginx Web Server
+  - name: web-server
+    image: nginx:1.25
     ports:
     - containerPort: 80
-  - name: nodejs
-    image: nodejs
+    volumeMounts:
+    - name: shared-html
+      mountPath: /usr/share/nginx/html
+
+  # 3. Sidecar Container: Simulates a log/content generator
+  - name: sidecar-generator
+    image: busybox:1.36
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+      while true; do
+        echo "<h1>Hello from the Sidecar Container! $(date)</h1>" > /data/index.html;
+        sleep 10;
+      done
+    volumeMounts:
+    - name: shared-html
+      mountPath: /data
