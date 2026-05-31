@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-init-container
+  labels:
+    app: my-app
+spec:
+  # 1. Shared volume to pass data from Init Container to App Container
+  volumes:
+  - name: config-volume
+    emptyDir: {}
+
+  # 2. Init Container section
+  initContainers:
+  - name: config-generator
+    image: busybox:1.28
+    # Uses the Downward API to inject the Pod's IP into an environment variable
+    env:
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    # Command that runs to completion, writing the IP into the shared volume
+    command: ['sh', '-c', 'echo "server_ip=${POD_IP}" > /tmp/config/app.conf && echo "Config generated successfully!"']
+    volumeMounts:
+    - name: config-volume
+      mountPath: /tmp/config
+
+  # 3. Main Application Container section
+  containers:
+  - name: main-app
+    image: alpine:3.18
+    # The main app won't start until 'config-generator' exits with a 0 status
+    command: ['sh', '-c', 'echo "Starting main app..." && cat /etc/config/app.conf && sleep 3600']
+    volumeMounts:
+    - name: config-volume
+      mountPath: /etc/config
