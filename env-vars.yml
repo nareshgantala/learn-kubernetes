@@ -11,3 +11,22 @@ spec:
       value: "Hello from the environment"
     - name: DEMO_FAREWELL
       value: "Such a sweet sorrow"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-shell-demo
+spec:
+  containers:
+  - name: ubuntu-container
+    image: ubuntu:24.04
+    command: ["sleep", "3600"]
+    env:
+    - name: APP_ENVIRONMENT
+      value: "production"
+    - name: DB_HOST
+      value: "postgres-service.internal"
+    - name: API_KEY
+      value: "super-secret-token-123"
