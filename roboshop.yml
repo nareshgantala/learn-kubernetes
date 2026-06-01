@@ -19,6 +19,8 @@ spec:
         image: nareshroboshop.azurecr.io/roboshop-frontend
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -51,6 +53,8 @@ spec:
       containers:
       - name: roboshop-cart
         image: nareshroboshop.azurecr.io/roboshop-cart
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -84,6 +88,8 @@ spec:
       containers:
       - name: roboshop-catalogue
         image: nareshroboshop.azurecr.io/roboshop-catalogue
+      imagePullSecrets:
+      - name: acr-secret
 
 
 ---
@@ -119,6 +125,8 @@ spec:
       containers:
       - name: roboshop-user
         image: nareshroboshop.azurecr.io/roboshop-user
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -152,6 +160,8 @@ spec:
       containers:
       - name: roboshop-payment
         image: nareshroboshop.azurecr.io/roboshop-payment
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -184,6 +194,8 @@ spec:
       containers:
       - name: roboshop-shipping
         image: nareshroboshop.azurecr.io/roboshop-shipping
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -216,6 +228,8 @@ spec:
       containers:
       - name: roboshop-ratings
         image: nareshroboshop.azurecr.io/roboshop-ratings
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
@@ -249,6 +263,8 @@ spec:
       containers:
       - name: roboshop-orders
         image: nareshroboshop.azurecr.io/roboshop-orders
+      imagePullSecrets:
+      - name: acr-secret
 ---
 apiVersion: v1
 kind: Service
