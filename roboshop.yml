@@ -1,0 +1,263 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-frontend
+  labels:
+    app: roboshop-frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-frontend
+  template:
+    metadata:
+      labels:
+        app: roboshop-frontend
+    spec:
+      containers:
+      - name: roboshop-frontend
+        image: nareshroboshop.azurecr.io/roboshop-frontend
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-frontend
+spec:
+  selector:
+    app: roboshop-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-cart
+  labels:
+    app: roboshop-cart
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-cart
+  template:
+    metadata:
+      labels:
+        app: roboshop-cart
+    spec:
+      containers:
+      - name: roboshop-cart
+        image: nareshroboshop.azurecr.io/roboshop-cart
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-cart
+spec:
+  selector:
+    app: roboshop-cart
+  ports:
+    - protocol: TCP
+      port: 8003
+      targetPort: 8003
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-catalogue
+  labels:
+    app: roboshop-catalogue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-catalogue
+  template:
+    metadata:
+      labels:
+        app: roboshop-catalogue
+    spec:
+      containers:
+      - name: roboshop-catalogue
+        image: nareshroboshop.azurecr.io/roboshop-catalogue
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-catalogue
+spec:
+  selector:
+    app: roboshop-catalogue
+  ports:
+    - protocol: TCP
+      port: 8002
+      targetPort: 8002
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-user
+  labels:
+    app: roboshop-user
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-user
+  template:
+    metadata:
+      labels:
+        app: roboshop-user
+    spec:
+      containers:
+      - name: roboshop-user
+        image: nareshroboshop.azurecr.io/roboshop-user
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-user
+spec:
+  selector:
+    app: roboshop-user
+  ports:
+    - protocol: TCP
+      port: 8001
+      targetPort: 8001
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-payment
+  labels:
+    app: roboshop-payment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-payment
+  template:
+    metadata:
+      labels:
+        app: roboshop-payment
+    spec:
+      containers:
+      - name: roboshop-payment
+        image: nareshroboshop.azurecr.io/roboshop-payment
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-payment
+spec:
+  selector:
+    app: roboshop-payment
+  ports:
+    - protocol: TCP
+      port: 8005
+      targetPort: 8005
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-shipping
+  labels:
+    app: roboshop-shipping  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-shipping
+  template:
+    metadata:
+      labels:
+        app: roboshop-shipping
+    spec:
+      containers:
+      - name: roboshop-shipping
+        image: nareshroboshop.azurecr.io/roboshop-shipping
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-shipping
+spec:
+  selector:
+    app: roboshop-shipping
+  ports:
+    - protocol: TCP
+      port: 8004
+      targetPort: 8004
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-ratings
+  labels:
+    app: roboshop-ratings  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-ratings
+  template:
+    metadata:
+      labels:
+        app: roboshop-ratings
+    spec:
+      containers:
+      - name: roboshop-ratings
+        image: nareshroboshop.azurecr.io/roboshop-ratings
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-ratings
+spec:
+  selector:
+    app: roboshop-ratings
+  ports:
+    - protocol: TCP
+      port: 8006
+      targetPort: 8006
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: roboshop-orders
+  labels:
+    app: roboshop-orders  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: roboshop-orders
+  template:
+    metadata:
+      labels:
+        app: roboshop-orders
+    spec:
+      containers:
+      - name: roboshop-orders
+        image: nareshroboshop.azurecr.io/roboshop-orders
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: roboshop-orders
+spec:
+  selector:
+    app: roboshop-orders
+  ports:
+    - protocol: TCP
+      port: 8007
+      targetPort: 8007
