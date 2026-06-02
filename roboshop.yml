@@ -5,7 +5,7 @@ metadata:
   labels:
     app: roboshop-frontend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-frontend
@@ -46,7 +46,7 @@ metadata:
   labels:
     app: roboshop-cart
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-cart
@@ -84,7 +84,7 @@ metadata:
   labels:
     app: roboshop-catalogue
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-catalogue
@@ -124,7 +124,7 @@ metadata:
   labels:
     app: roboshop-user
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-user
@@ -162,7 +162,7 @@ metadata:
   labels:
     app: roboshop-payment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-payment
@@ -199,7 +199,7 @@ metadata:
   labels:
     app: roboshop-shipping  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-shipping
@@ -236,7 +236,7 @@ metadata:
   labels:
     app: roboshop-ratings  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-ratings
@@ -274,7 +274,7 @@ metadata:
   labels:
     app: roboshop-orders  
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: roboshop-orders
