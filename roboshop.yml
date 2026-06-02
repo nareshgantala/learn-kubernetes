@@ -31,7 +31,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-resource-group: "denmark-east"
 spec:
   type: LoadBalancer
-  loadBalancerIP: "9.205.157.235" # Put the real IP address here
+  loadBalancerIP: "9.205.157.246" # Put the real IP address here
   selector:
     app: roboshop-frontend
   ports:
