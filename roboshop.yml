@@ -380,3 +380,48 @@ data:
   MYSQL_PASSWORD: "RoboShop@1"
   MYSQL_DATABASE: "ratings"
   PORT: "8006"
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: roboshop-catalogue-db
+spec:
+  template:
+    spec:
+      containers:
+      - name: catalogue-db
+        image: nareshroboshop.azurecr.io/roboshop-catalogue-db
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: roboshop-catalogue
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: roboshop-ratings-db
+spec:
+  template:
+    spec:
+      containers:
+      - name: ratings-db
+        image: nareshroboshop.azurecr.io/roboshop-ratings-db
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: roboshop-ratings
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: roboshop-shipping-db
+spec:
+  template:
+    spec:
+      containers:
+      - name: shipping-db
+        image: nareshroboshop.azurecr.io/roboshop-shipping-db
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: roboshop-shipping
