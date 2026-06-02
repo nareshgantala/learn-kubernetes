@@ -53,6 +53,9 @@ spec:
       containers:
       - name: roboshop-cart
         image: nareshroboshop.azurecr.io/roboshop-cart
+        envFrom:
+        - configMapRef:
+            name: roboshop-cart        
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -88,6 +91,9 @@ spec:
       containers:
       - name: roboshop-catalogue
         image: nareshroboshop.azurecr.io/roboshop-catalogue
+        envFrom:
+        - configMapRef:
+            name: roboshop-catalogue
       imagePullSecrets:
       - name: acr-secret
 
@@ -125,6 +131,9 @@ spec:
       containers:
       - name: roboshop-user
         image: nareshroboshop.azurecr.io/roboshop-user
+        envFrom:
+        - configMapRef:
+            name: roboshop-user
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -160,6 +169,9 @@ spec:
       containers:
       - name: roboshop-payment
         image: nareshroboshop.azurecr.io/roboshop-payment
+        envFrom:
+        - configMapRef:
+            name: roboshop-payment
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -194,6 +206,9 @@ spec:
       containers:
       - name: roboshop-shipping
         image: nareshroboshop.azurecr.io/roboshop-shipping
+        envFrom:
+        - configMapRef:
+            name: roboshop-shipping
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -228,6 +243,9 @@ spec:
       containers:
       - name: roboshop-ratings
         image: nareshroboshop.azurecr.io/roboshop-ratings
+        envFrom:
+        - configMapRef:
+            name: roboshop-ratings
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -263,6 +281,9 @@ spec:
       containers:
       - name: roboshop-orders
         image: nareshroboshop.azurecr.io/roboshop-orders
+        envFrom:
+        - configMapRef:
+            name: roboshop-orders
       imagePullSecrets:
       - name: acr-secret
 ---
@@ -277,3 +298,80 @@ spec:
     - protocol: TCP
       port: 8007
       targetPort: 8007
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-catalogue
+data:
+  MYSQL_HOST:localhost
+  MYSQL_USER:catalogue
+  MYSQL_PASSWORD:RoboShop@1
+  MYSQL_DATABASE:catalogue
+  PORT:8002
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-cart
+data:
+  REDIS_HOST:localhost
+  CATALOGUE_URL:http://localhost:8002
+  PORT:8003
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-user
+data:
+  MONGO_URL:mongodb://localhost:27017/users
+  JWT_SECRET:roboshop-secret-key
+  PORT:8001
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-shipping
+data:
+  DB_HOST:localhost
+  DB_USER:shipping
+  DB_PASS:RoboShop@1
+  PORT:8004
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-payment
+data:
+  AMQP_HOST:localhost
+  AMQP_USER:roboshop
+  AMQP_PASS:RoboShop@1
+  CART_URL:http://localhost:8003
+  USER_URL:http://localhost:8001
+  PORT:8005
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-orders
+data:
+  MONGO_URL:mongodb://localhost:27017/orders
+  AMQP_HOST:localhost
+  AMQP_USER:roboshop
+  AMQP_PASS:RoboShop@1
+  SHIPPING_URL:http://localhost:8004
+  NOTIFICATION_URL:http://localhost:8008
+  PORT:8007
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roboshop-ratings
+data:
+  MYSQL_HOST:localhost
+  MYSQL_USER:ratings
+  MYSQL_PASSWORD:RoboShop@1
+  MYSQL_DATABASE:ratings
+  PORT:8006
