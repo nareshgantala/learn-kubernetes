@@ -26,7 +26,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: roboshop-frontend
+  annotations:
+    # Tells AKS to bind this service to your specific Azure public IP resource
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: "denmark-east"
 spec:
+  type: LoadBalancer
+  loadBalancerIP: "9.205.157.235" # Put the real IP address here
   selector:
     app: roboshop-frontend
   ports:
@@ -305,27 +310,27 @@ kind: ConfigMap
 metadata:
   name: roboshop-catalogue
 data:
-  MYSQL_HOST:localhost
-  MYSQL_USER:catalogue
-  MYSQL_PASSWORD:RoboShop@1
-  MYSQL_DATABASE:catalogue
-  PORT:8002
+  MYSQL_HOST: mysql-dev.naresh-training.online
+  MYSQL_USER: catalogue
+  MYSQL_PASSWORD: RoboShop@1
+  MYSQL_DATABASE: catalogue
+  PORT: 8002
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: roboshop-cart
 data:
-  REDIS_HOST:localhost
-  CATALOGUE_URL:http://localhost:8002
-  PORT:8003
+  REDIS_HOST: valkey-dev.naresh-training.online
+  CATALOGUE_URL: http://roboshop-catalogue:8002
+  PORT: 8003
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: roboshop-user
 data:
-  MONGO_URL:mongodb://localhost:27017/users
+  MONGO_URL:mongodb://mongodb-dev.naresh-training.online:27017/users
   JWT_SECRET:roboshop-secret-key
   PORT:8001
 ---
@@ -334,35 +339,35 @@ kind: ConfigMap
 metadata:
   name: roboshop-shipping
 data:
-  DB_HOST:localhost
-  DB_USER:shipping
-  DB_PASS:RoboShop@1
-  PORT:8004
+  DB_HOST: mysql-dev.naresh-training.online
+  DB_USER: shipping
+  DB_PASS: RoboShop@1
+  PORT: 8004
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: roboshop-payment
 data:
-  AMQP_HOST:localhost
-  AMQP_USER:roboshop
-  AMQP_PASS:RoboShop@1
-  CART_URL:http://localhost:8003
-  USER_URL:http://localhost:8001
-  PORT:8005
+  AMQP_HOST: rabbitmq-dev.naresh-training.online
+  AMQP_USER: roboshop
+  AMQP_PASS: RoboShop@1
+  CART_URL: http://roboshop-cart:8003
+  USER_URL: http://roboshop-user:8001
+  PORT: 8005
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: roboshop-orders
 data:
-  MONGO_URL:mongodb://localhost:27017/orders
-  AMQP_HOST:localhost
-  AMQP_USER:roboshop
-  AMQP_PASS:RoboShop@1
-  SHIPPING_URL:http://localhost:8004
-  NOTIFICATION_URL:http://localhost:8008
-  PORT:8007
+  MONGO_URL: mongodb://mongodb-dev.naresh-training.online:27017/orders
+  AMQP_HOST: rabbitmq-dev.naresh-training.online
+  AMQP_USER: roboshop
+  AMQP_PASS: RoboShop@1
+  SHIPPING_URL: http://roboshop-shipping:8004
+  NOTIFICATION_URL: http://localhost:8008
+  PORT: 8007
 
 ---
 apiVersion: v1
@@ -370,8 +375,8 @@ kind: ConfigMap
 metadata:
   name: roboshop-ratings
 data:
-  MYSQL_HOST:localhost
-  MYSQL_USER:ratings
-  MYSQL_PASSWORD:RoboShop@1
-  MYSQL_DATABASE:ratings
-  PORT:8006
+  MYSQL_HOST: mysql-dev.naresh-training.online
+  MYSQL_USER: ratings
+  MYSQL_PASSWORD: RoboShop@1
+  MYSQL_DATABASE: ratings
+  PORT: 8006
