@@ -380,11 +380,11 @@ metadata:
 spec:
   template:
     spec:
+      restartPolicy: Never
       containers:
       - name: catalogue-db
         image: nareshroboshop.azurecr.io/roboshop-catalogue-db
         imagePullPolicy: Always
-        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-catalogue
@@ -396,11 +396,11 @@ metadata:
 spec:
   template:
     spec:
+      restartPolicy: Never
       containers:
       - name: ratings-db
         image: nareshroboshop.azurecr.io/roboshop-ratings-db
         imagePullPolicy: Always
-        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-ratings
@@ -412,11 +412,11 @@ metadata:
 spec:
   template:
     spec:
+      restartPolicy: Never
       containers:
       - name: shipping-db
         image: nareshroboshop.azurecr.io/roboshop-shipping-db
         imagePullPolicy: Always
-        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-shipping
