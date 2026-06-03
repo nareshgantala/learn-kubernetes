@@ -384,6 +384,7 @@ spec:
       - name: catalogue-db
         image: nareshroboshop.azurecr.io/roboshop-catalogue-db
         imagePullPolicy: Always
+        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-catalogue
@@ -399,6 +400,7 @@ spec:
       - name: ratings-db
         image: nareshroboshop.azurecr.io/roboshop-ratings-db
         imagePullPolicy: Always
+        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-ratings
@@ -414,6 +416,7 @@ spec:
       - name: shipping-db
         image: nareshroboshop.azurecr.io/roboshop-shipping-db
         imagePullPolicy: Always
+        restartPolicy: Never
         envFrom:
           - configMapRef:
               name: roboshop-shipping
