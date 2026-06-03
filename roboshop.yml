@@ -341,6 +341,9 @@ kind: ConfigMap
 metadata:
   name: roboshop-payment
 data:
+  MYSQL_HOST: "mysql-dev.naresh-training.online"
+  MYSQL_USER: "ratings"
+  MYSQL_PASSWORD: "RoboShop@1"
   AMQP_HOST: "rabbitmq-dev.naresh-training.online"
   AMQP_USER: "roboshop"
   AMQP_PASS: "RoboShop@1"
