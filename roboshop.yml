@@ -331,25 +331,23 @@ kind: ConfigMap
 metadata:
   name: roboshop-shipping
 data:
-  MYSQL_HOST: "mysql-dev.naresh-training.online"
-  MYSQL_USER: "shipping"
-  MYSQL_PASSWORD: "RoboShop@1"
-  PORT: "8004"
+  DB_HOST : mysql-dev.rdevopsb89.online
+  DB_USER : shipping
+  DB_PASS : RoboShop@1
+  MYSQL_ROOT_PASSWORD : RoboShop@1
+  PORT : "8004"
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: roboshop-payment
 data:
-  MYSQL_HOST: "mysql-dev.naresh-training.online"
-  MYSQL_USER: "ratings"
-  MYSQL_PASSWORD: "RoboShop@1"
-  AMQP_HOST: "rabbitmq-dev.naresh-training.online"
-  AMQP_USER: "roboshop"
-  AMQP_PASS: "RoboShop@1"
-  CART_URL: "http://roboshop-cart:8003"
-  USER_URL: "http://roboshop-user:8001"
-  PORT: "8005"
+  AMQP_HOST : rabbitmq-dev.rdevopsb89.online
+  AMQP_USER : roboshop
+  AMQP_PASS : RoboShop@1
+  CART_URL : http://roboshop-cart:8003
+  USER_URL : http://roboshop-user:8001
+  PORT : "8005"
 ---
 apiVersion: v1
 kind: ConfigMap
