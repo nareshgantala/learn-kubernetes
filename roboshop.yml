@@ -331,9 +331,9 @@ kind: ConfigMap
 metadata:
   name: roboshop-shipping
 data:
-  DB_HOST: "mysql-dev.naresh-training.online"
-  DB_USER: "shipping"
-  DB_PASS: "RoboShop@1"
+  MYSQL_HOST: "mysql-dev.naresh-training.online"
+  MYSQL_USER: "shipping"
+  MYSQL_PASSWORD: "RoboShop@1"
   PORT: "8004"
 ---
 apiVersion: v1
