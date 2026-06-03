@@ -331,7 +331,7 @@ kind: ConfigMap
 metadata:
   name: roboshop-shipping
 data:
-  DB_HOST : mysql-dev.rdevopsb89.online
+  DB_HOST : mysql-dev.naresh-training.online
   DB_USER : shipping
   DB_PASS : RoboShop@1
   MYSQL_ROOT_PASSWORD : RoboShop@1
@@ -342,7 +342,7 @@ kind: ConfigMap
 metadata:
   name: roboshop-payment
 data:
-  AMQP_HOST : rabbitmq-dev.rdevopsb89.online
+  AMQP_HOST : rabbitmq-dev.naresh-training.online
   AMQP_USER : roboshop
   AMQP_PASS : RoboShop@1
   CART_URL : http://roboshop-cart:8003
