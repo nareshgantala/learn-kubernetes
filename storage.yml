@@ -6,7 +6,7 @@ provisioner: disk.csi.azure.com
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 parameters:
-  skuName: Premium_LRS
+  skuName: StandardSSD_LRS
 
 
 
