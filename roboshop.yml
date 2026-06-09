@@ -342,7 +342,7 @@ kind: ConfigMap
 metadata:
   name: roboshop-payment
 data:
-  AMQP_HOST : rabbitmq-dev.naresh-training.online
+  AMQP_HOST : rabbitmq-dev.naresh-training.online  
   AMQP_USER : roboshop
   AMQP_PASS : RoboShop@1
   CART_URL : http://roboshop-cart:8003
