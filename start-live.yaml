@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: probes-demo-pod
+  labels:
+    test: probes
+spec:
+  containers:
+    - name: probe-container
+      image: alpine
+      # మెయిన్ కంటైనర్ స్టార్ట్ అవ్వగానే ఫైల్ క్రియేట్ చేసి, 30 సెకన్ల తర్వాత డిలీట్ చేసే లాజిక్
+      command: ["sh", "-c", "touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600"]
+      
+      # 1. Startup Probe: కంటైనర్ మొదట సక్సెస్ అయిందో లేదో చూస్తుంది
+      startupProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 2
+        periodSeconds: 2
+        failureThreshold: 5
+
+      # 2. Liveness Probe: ఇది 30 సెకన్ల తర్వాత ఫైల్ డిలీట్ అవ్వగానే ఫెయిల్ అవుతుంది
+      livenessProbe:
+        exec:
+          command:
+            - cat
+            - /tmp/healthy      # ఈ ఫైల్ లేకపోతే కంటైనర్ రీస్టార్ట్ అవుతుంది
+        initialDelaySeconds: 5
+        periodSeconds: 5        # ప్రతి 5 సెకన్లకు ఒకసారి ఫైల్ ఉందో లేదో చెక్ చేస్తుంది
+        failureThreshold: 1     # ఒకసారి ఫైల్ కనిపించకపోతే వెంటనే యాక్షన్ తీసుకుంటుంది
