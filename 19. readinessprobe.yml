@@ -8,7 +8,7 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    # కంటైనర్ స్టార్ట్ అవుతూనే రెండు ఫైల్స్ క్రియేట్ చేసి, ఆ తర్వాత nginx ని బ్యాక్‌గ్రౌండ్‌లో రన్ చేస్తుంది
+    
     command: ["sh", "-c", "touch /tmp/healthy /tmp/ready; nginx -g 'daemon off;'"]
 
     readinessProbe:
@@ -26,4 +26,4 @@ spec:
         - /tmp/healthy
       initialDelaySeconds: 5
       periodSeconds: 5
-      failureThreshold: 3 # కనీసం 3 సార్లు చెక్ చేసేలా threshold పెంచడం మంచిది
+      failureThreshold: 3 
