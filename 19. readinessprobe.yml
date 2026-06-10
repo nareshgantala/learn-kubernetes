@@ -19,11 +19,11 @@ spec:
       periodSeconds: 5
 
           # 2. Liveness Probe: ఇది 30 సెకన్ల తర్వాత ఫైల్ డిలీట్ అవ్వగానే ఫెయిల్ అవుతుంది
-      livenessProbe:
-        exec:
-          command:
-            - cat
-            - /tmp/healthy      # ఈ ఫైల్ లేకపోతే కంటైనర్ రీస్టార్ట్ అవుతుంది
-        initialDelaySeconds: 5
-        periodSeconds: 5        # ప్రతి 5 సెకన్లకు ఒకసారి ఫైల్ ఉందో లేదో చెక్ చేస్తుంది
-        failureThreshold: 1  
+    livenessProbe:
+      exec:
+        command:
+          - cat
+          - /tmp/healthy      # ఈ ఫైల్ లేకపోతే కంటైనర్ రీస్టార్ట్ అవుతుంది
+      initialDelaySeconds: 5
+      periodSeconds: 5        # ప్రతి 5 సెకన్లకు ఒకసారి ఫైల్ ఉందో లేదో చెక్ చేస్తుంది
+      failureThreshold: 1  
