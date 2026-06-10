@@ -8,22 +8,22 @@ spec:
   containers:
   - name: nginx
     image: nginx
+    # కంటైనర్ స్టార్ట్ అవుతూనే రెండు ఫైల్స్ క్రియేట్ చేసి, ఆ తర్వాత nginx ని బ్యాక్‌గ్రౌండ్‌లో రన్ చేస్తుంది
+    command: ["sh", "-c", "touch /tmp/healthy /tmp/ready; nginx -g 'daemon off;'"]
 
     readinessProbe:
       exec:
         command:
         - cat
         - /tmp/ready
-
       initialDelaySeconds: 5
       periodSeconds: 5
 
-          # 2. Liveness Probe: ఇది 30 సెకన్ల తర్వాత ఫైల్ డిలీట్ అవ్వగానే ఫెయిల్ అవుతుంది
     livenessProbe:
       exec:
         command:
-          - cat
-          - /tmp/healthy      # ఈ ఫైల్ లేకపోతే కంటైనర్ రీస్టార్ట్ అవుతుంది
+        - cat
+        - /tmp/healthy
       initialDelaySeconds: 5
-      periodSeconds: 5        # ప్రతి 5 సెకన్లకు ఒకసారి ఫైల్ ఉందో లేదో చెక్ చేస్తుంది
-      failureThreshold: 1  
+      periodSeconds: 5
+      failureThreshold: 3 # కనీసం 3 సార్లు చెక్ చేసేలా threshold పెంచడం మంచిది
